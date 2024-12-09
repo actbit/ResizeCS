@@ -67,13 +67,9 @@ namespace ResizeCS.Test
 
 
                 }
-                using(SKBitmap outputBitmap = new SKBitmap(outputWidth,outputHeight))
+                using(SKBitmap outputBitmap = originalSizeOutputBitmap.Resize(new SKImageInfo(outputWidth, outputHeight), new SKSamplingOptions(SKFilterMode.Linear, SKMipmapMode.Linear)))
                 {
-                    using(SKCanvas canvas = new SKCanvas(outputBitmap))
-                    {
-                        canvas.DrawBitmap(originalSizeOutputBitmap, new SKRect(0, 0, originalSizeOutputWidth, originalSizeOutputHeight), new SKRect(0, 0, outputWidth, outputHeight));
 
-                    }
                     var span = outputBitmap.Encode(outputType.Value, 100).AsSpan();
                     goalHash = Convert.ToBase64String(sHA256.ComputeHash(span.ToArray()));
                     using (Stream stream = outputBitmap.Encode(outputType.Value, 100).AsStream())

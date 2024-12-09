@@ -18,12 +18,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <None Update="test.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Update="test1.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
+    <None Include=".github\workflows\build.yml" />
   </ItemGroup>
 
 </Project>

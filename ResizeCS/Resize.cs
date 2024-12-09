@@ -43,7 +43,10 @@ namespace ResizeCS
                 SKBitmap outputBitmap; 
                 if(desiredRatio !=  Ration)
                 {
-                    outputBitmap = DifferentAspectResize(sKBitmap,width,height,desiredRatio);
+                    using (SKBitmap trimedBitmap = Trim(sKBitmap, desiredRatio))
+                    {
+                        outputBitmap=SameAspectResize(trimedBitmap,width,height);
+                    }
                 }
                 else
                 {
@@ -71,9 +74,10 @@ namespace ResizeCS
             }
             stopwatch.Stop();
             Console.WriteLine($"time:{stopwatch.ElapsedMilliseconds}ms");
+
         }
 
-        SKBitmap DifferentAspectResize(SKBitmap sKBitmap,int outWidht,int outHeight,double desiredRatio)
+        SKBitmap Trim(SKBitmap sKBitmap,double desiredRatio)
         {
             double Ration = (double)sKBitmap.Width / (double)sKBitmap.Height;
             int cutHeight, cutWidth;
@@ -88,14 +92,14 @@ namespace ResizeCS
                 cutHeight = (int)(sKBitmap.Width / desiredRatio);
                 cutWidth = sKBitmap.Width;
             }
-            SKBitmap cutBitmap = new SKBitmap(outWidht, outHeight);
+            SKBitmap cutBitmap = new SKBitmap(cutWidth, cutHeight);
             using (SKCanvas canvas = new SKCanvas(cutBitmap))
             {
                 int left = (sKBitmap.Width - cutWidth) / 2;
                 int top = (sKBitmap.Height - cutHeight) / 2;
 
                 SKRect sKRect = new SKRect(left, top, left + cutWidth, top + cutHeight);
-                SKRect destRect = new SKRect(0, 0, outWidht, outHeight);
+                SKRect destRect = new SKRect(0, 0, cutWidth, cutHeight);
                 canvas.DrawBitmap(sKBitmap, sKRect, destRect);
             }
             return cutBitmap;
@@ -104,7 +108,7 @@ namespace ResizeCS
 
         SKBitmap SameAspectResize(SKBitmap sKBitmap, int outWidth,int outHeight)
         {
-            return sKBitmap.Resize(new SKImageInfo(outWidth,outHeight),new  SKSamplingOptions(SKFilterMode.Nearest,SKMipmapMode.None)) ;
+            return sKBitmap.Resize(new SKImageInfo(outWidth,outHeight),new  SKSamplingOptions(SKFilterMode.Linear,SKMipmapMode.Linear)) ;
         }
         SKEncodedImageFormat? StringExtensionToSKEncodedImageFormat(string extensionStr)
         {
