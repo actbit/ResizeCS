@@ -4,13 +4,13 @@ on:
   push:
     tags:
       - 'v*' # タグが `v*` の形式（例: v1.0.0）でプッシュされたときに実行
-
+defaults:
+    run:
+        working-directory: ./ResizeCS
 jobs:
   build:
     runs-on: ubuntu-latest
-    defaults:
-        run:
-          working-directory: ResizeCS
+
 
     steps:
       # リポジトリをチェックアウト
