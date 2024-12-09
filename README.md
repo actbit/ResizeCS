@@ -11,7 +11,7 @@ releaseより最新版の`ResizeCS-**-x**.zip`をDL解凍します。
 #### 実行
 
 ```
-ResizeCS.exe -i 入力ファイルパス -o 出力ファイルパス -w 出力画像サイズ
+ResizeCS.exe -i 入力ファイルパス -o 出力ファイルパス -w 出力画像の横サイズ -h 出力画像の縦サイズ
 ```
 
 ### Linux / Mac
@@ -25,7 +25,7 @@ chmod +x ResizeCS
 #### 実行
 
 ```
-ResizeCS -i 入力ファイルパス -o 出力ファイルパス -w 出力画像サイズ
+ResizeCS -i 入力ファイルパス -o 出力ファイルパス -w 出力画像の横サイズ -h 出力画像の縦サイズ
 ```
 
 ---
