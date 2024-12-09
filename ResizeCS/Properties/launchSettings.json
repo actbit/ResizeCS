@@ -1,0 +1,23 @@
+{
+  "profiles": {
+    "ResizeCS": {
+      "commandName": "Project"
+    },
+    "WSL": {
+      "commandName": "WSL2",
+      "distributionName": ""
+    },
+    "プロファイル 1": {
+      "commandName": "Project",
+      "commandLineArgs": "-i test.png -o testop.jpg"
+    },
+    "プロファイル 2": {
+      "commandName": "Project",
+      "commandLineArgs": "-i test1.png -o testo1.jpg"
+    },
+    "プロファイル 3": {
+      "commandName": "Project",
+      "commandLineArgs": "-i test1.png -o testo1.jpg"
+    }
+  }
+}
