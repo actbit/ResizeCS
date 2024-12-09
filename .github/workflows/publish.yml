@@ -33,10 +33,10 @@ jobs:
         # .NETプロジェクトをPublish
       - name: Publish  project
         run: |
-            dotnet publish -r win-x64 -c Release --self-contained true -o ./${REPO_NAME}-win-x64 -p:PublishTrimmed=true -p:PublishSingleFile=true --no-restore
-            dotnet publish -r win-x86 -c Release --self-contained true -o ./${REPO_NAME}-win-x86 -p:PublishTrimmed=true -p:PublishSingleFile=true --no-restore
-            dotnet publish -r linux-x64 -c Release --self-contained true -o ./${REPO_NAME}-linux-x64 -p:PublishTrimmed=true -p:PublishSingleFile=true --no-restore
-            dotnet publish -r osx-x64 -c Release --self-contained true -o ./${REPO_NAME}-osx-x64 -p:PublishTrimmed=true -p:PublishSingleFile=true --no-restore
+            dotnet publish -r win-x64 -c Release --self-contained true -o ./${REPO_NAME}-win-x64 -p:PublishTrimmed=true -p:PublishSingleFile=true 
+            dotnet publish -r win-x86 -c Release --self-contained true -o ./${REPO_NAME}-win-x86 -p:PublishTrimmed=true -p:PublishSingleFile=true 
+            dotnet publish -r linux-x64 -c Release --self-contained true -o ./${REPO_NAME}-linux-x64 -p:PublishTrimmed=true -p:PublishSingleFile=true 
+            dotnet publish -r osx-x64 -c Release --self-contained true -o ./${REPO_NAME}-osx-x64 -p:PublishTrimmed=true -p:PublishSingleFile=true 
 
       # アーティファクトを圧縮（オプション）
       - name: Zip the published files
