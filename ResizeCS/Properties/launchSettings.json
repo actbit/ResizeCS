@@ -10,7 +10,7 @@
     "プロファイル 1": {
       "commandName": "Project",
       "commandLineArgs": "-i test.png -o testop.jpg"
-    },
+    }
 
   }
 }
