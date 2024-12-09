@@ -56,12 +56,11 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
             name: release-artifacts-${{ env.REPO_NAME }}-${{ github.ref_name }}
-            working-directory: ./ResizeCS
             path: |
-                ${{ env.REPO_NAME }}-win-x64.zip
-                ${{ env.REPO_NAME }}-win-x86.zip
-                ${{ env.REPO_NAME }}-linux-x64.zip
-                ${{ env.REPO_NAME }}-osx-x64.zip
+                ./ResizeCS/${{ env.REPO_NAME }}-win-x64.zip
+                ./ResizeCS/${{ env.REPO_NAME }}-win-x86.zip
+                ./ResizeCS/${{ env.REPO_NAME }}-linux-x64.zip
+                ./ResizeCS/${{ env.REPO_NAME }}-osx-x64.zip
 
       # リリースを作成してアーティファクトを添付
       - name: Create Release
