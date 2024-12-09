@@ -30,10 +30,10 @@ jobs:
       - name: Set version
         id: version
         run: |
-          REPOSITORY=$(echo ${{ github.repository }} | sed -e "s#.*/##")
-          VERSION=$(echo ${{ github.ref }} | sed -e "s#refs/tags/##g")
-          echo ::set-output name=version::$VERSION
-          echo ::set-output name=filename::$REPOSITORY-$VERSION
+            REPOSITORY=$(echo "${GITHUB_REPOSITORY}" | sed -e "s#.*/##")
+            VERSION=$(echo "${GITHUB_REF}" | sed -e "s#refs/tags/##g")
+            echo "version=$VERSION" >> $GITHUB_ENV
+            echo "filename=${REPOSITORY}-${VERSION}" >> $GITHUB_ENV
       
         # .NETプロジェクトをPublish
       - name: Publish  project
@@ -50,6 +50,7 @@ jobs:
             zip -r ./${{ steps.version.outputs.filename }}-win-x86.zip ./${{ steps.version.outputs.filename }}-win-x86 
             zip -r ./${{ steps.version.outputs.filename }}-linux-x64.zip ./${{ steps.version.outputs.filename }}-linux-x64 
             zip -r ./${{ steps.version.outputs.filename }}-osx-x64.zip ./${{ steps.version.outputs.filename }}-osx-x64 
+            ls
             
 
       # リリースを作成してアーティファクトを添付
