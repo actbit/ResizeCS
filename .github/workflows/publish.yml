@@ -57,15 +57,18 @@ jobs:
                 ./${{ env.REPO_NAME }}-win-x86.zip
                 ./${{ env.REPO_NAME }}-linux-x64.zip
                 ./${{ env.REPO_NAME }}-osx-x64.zip
-                
+
       # リリースを作成してアーティファクトを添付
       - name: Create Release
         uses: ncipollo/release-action@v1
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           tag: ${{ github.ref_name }} # タグ名（例: v1.0.0）
-          release_name: Release ${{ github.ref_name }}
+          name: Release ${{ github.ref_name }}
           body: "Automatically generated release for version ${{ github.ref_name }}."
           draft: true
           artifacts: |
-            ./*.zip 
+                ./${{ env.REPO_NAME }}-win-x64.zip
+                ./${{ env.REPO_NAME }}-win-x86.zip
+                ./${{ env.REPO_NAME }}-linux-x64.zip
+                ./${{ env.REPO_NAME }}-osx-x64.zip
