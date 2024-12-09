@@ -46,7 +46,11 @@ jobs:
             zip -r ./${{ env.REPO_NAME }}-win-x86.zip ./${{ env.REPO_NAME }}-win-x86 
             zip -r ./${{ env.REPO_NAME }}-linux-x64.zip ./${{ env.REPO_NAME }}-linux-x64 
             zip -r ./${{ env.REPO_NAME }}-osx-x64.zip ./${{ env.REPO_NAME }}-osx-x64 
+
+      - name: ls
+        run: |
             ls
+            pwd
             
       - name: Upload Artifacts
         uses: actions/upload-artifact@v3
