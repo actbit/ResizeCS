@@ -4,7 +4,7 @@ ResizeCSは指定したサイズに画像をリサイズすることができる
 
 ## 使用方法
 
-releaseより最新版の`ResizeCS-**-x**.zip`をDL解凍します。
+[Releases](https://github.com/actbit/ResizeCS/releases)より最新版の`ResizeCS-**-x**.zip`をDL解凍します。
 
 ### Windows 
 
