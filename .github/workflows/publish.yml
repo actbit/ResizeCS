@@ -31,7 +31,7 @@ jobs:
       - name: Publish  project
         run: |
             dotnet publish -r win-x64 -c Release --self-contained true -o ./${{github.repository}}-win-x64 -p:PublishTrimmed=true -p:PublishSingleFile=true
-            dotnet publish -r win-x32 -c Release --self-contained true -o ./${{github.repository}}-win-x32 -p:PublishTrimmed=true -p:PublishSingleFile=true
+            dotnet publish -r win-x86 -c Release --self-contained true -o ./${{github.repository}}-win-x86 -p:PublishTrimmed=true -p:PublishSingleFile=true
             dotnet publish -r linux-x64 -c Release --self-contained true -o ./${{github.repository}}-linux-x64 -p:PublishTrimmed=true -p:PublishSingleFile=true
             dotnet publish -r osx-x64 -c Release --self-contained true -o ./${{github.repository}}-osx-x64 -p:PublishTrimmed=true -p:PublishSingleFile=true
 
@@ -39,7 +39,7 @@ jobs:
       - name: Zip the published files
         run: | 
             zip -r ./${{github.repository}}-win-x64.zip ./${{github.repository}}-win-x64 
-            zip -r ./${{github.repository}}-win-x32.zip ./${{github.repository}}-win-x32 
+            zip -r ./${{github.repository}}-win-x86.zip ./${{github.repository}}-win-x86 
             zip -r ./${{github.repository}}-linux-x64.zip ./${{github.repository}}-linux-x64 
             zip -r ./${{github.repository}}-osx-x64.zip ./${{github.repository}}-osx-x64 
             
@@ -54,6 +54,6 @@ jobs:
           body: "Automatically generated release for version ${{ github.ref_name }}."
           draft: true
           artifacts: |
-            ./${{github.repository}}-win-x32.zip 
+            ./${{github.repository}}-win-x86.zip 
             ./${{github.repository}}-linux-x64.zip
             ./${{github.repository}}-osx-x64.zip
