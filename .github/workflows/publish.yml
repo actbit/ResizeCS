@@ -53,14 +53,14 @@ jobs:
             pwd
             
       - name: Upload Artifacts
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
             name: release-artifacts-${{ env.REPO_NAME }}-${{ github.ref_name }}
             path: |
-                ./${{ env.REPO_NAME }}-win-x64.zip
-                ./${{ env.REPO_NAME }}-win-x86.zip
-                ./${{ env.REPO_NAME }}-linux-x64.zip
-                ./${{ env.REPO_NAME }}-osx-x64.zip
+                ${{ env.REPO_NAME }}-win-x64.zip
+                ${{ env.REPO_NAME }}-win-x86.zip
+                ${{ env.REPO_NAME }}-linux-x64.zip
+                ${{ env.REPO_NAME }}-osx-x64.zip
 
       # リリースを作成してアーティファクトを添付
       - name: Create Release
@@ -72,7 +72,7 @@ jobs:
           body: "Automatically generated release for version ${{ github.ref_name }}."
           draft: true
           artifacts: |
-                ./${{ env.REPO_NAME }}-win-x64.zip
-                ./${{ env.REPO_NAME }}-win-x86.zip
-                ./${{ env.REPO_NAME }}-linux-x64.zip
-                ./${{ env.REPO_NAME }}-osx-x64.zip
+                ${{ env.REPO_NAME }}-win-x64.zip
+                ${{ env.REPO_NAME }}-win-x86.zip
+                ${{ env.REPO_NAME }}-linux-x64.zip
+                ${{ env.REPO_NAME }}-osx-x64.zip
