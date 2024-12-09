@@ -27,21 +27,24 @@ jobs:
       - name: Restore dependencies
         run: dotnet restore
 
-      # .NETプロジェクトをPublish
+      - name: Set Repository Name
+        run: echo "REPO_NAME=${GITHUB_REPOSITORY##*/}" >> $GITHUB_ENV
+      
+        # .NETプロジェクトをPublish
       - name: Publish  project
         run: |
-            dotnet publish -r win-x64 -c Release --self-contained true -o ./${{github.repository}}-win-x64 -p:PublishTrimmed=true -p:PublishSingleFile=true --no-restore
-            dotnet publish -r win-x86 -c Release --self-contained true -o ./${{github.repository}}-win-x86 -p:PublishTrimmed=true -p:PublishSingleFile=true --no-restore
-            dotnet publish -r linux-x64 -c Release --self-contained true -o ./${{github.repository}}-linux-x64 -p:PublishTrimmed=true -p:PublishSingleFile=true --no-restore
-            dotnet publish -r osx-x64 -c Release --self-contained true -o ./${{github.repository}}-osx-x64 -p:PublishTrimmed=true -p:PublishSingleFile=true --no-restore
+            dotnet publish -r win-x64 -c Release --self-contained true -o ./${REPO_NAME}-win-x64 -p:PublishTrimmed=true -p:PublishSingleFile=true --no-restore
+            dotnet publish -r win-x86 -c Release --self-contained true -o ./${REPO_NAME}-win-x86 -p:PublishTrimmed=true -p:PublishSingleFile=true --no-restore
+            dotnet publish -r linux-x64 -c Release --self-contained true -o ./${REPO_NAME}-linux-x64 -p:PublishTrimmed=true -p:PublishSingleFile=true --no-restore
+            dotnet publish -r osx-x64 -c Release --self-contained true -o ./${REPO_NAME}-osx-x64 -p:PublishTrimmed=true -p:PublishSingleFile=true --no-restore
 
       # アーティファクトを圧縮（オプション）
       - name: Zip the published files
         run: | 
-            zip -r ./${{github.repository}}-win-x64.zip ./${{github.repository}}-win-x64 
-            zip -r ./${{github.repository}}-win-x86.zip ./${{github.repository}}-win-x86 
-            zip -r ./${{github.repository}}-linux-x64.zip ./${{github.repository}}-linux-x64 
-            zip -r ./${{github.repository}}-osx-x64.zip ./${{github.repository}}-osx-x64 
+            zip -r ./${REPO_NAME}-win-x64.zip ./${REPO_NAME}-win-x64 
+            zip -r ./${REPO_NAME}-win-x86.zip ./${REPO_NAME}-win-x86 
+            zip -r ./${REPO_NAME}-linux-x64.zip ./${REPO_NAME}-linux-x64 
+            zip -r ./${REPO_NAME}-osx-x64.zip ./${REPO_NAME}-osx-x64 
             
 
       # リリースを作成してアーティファクトを添付
@@ -55,6 +58,7 @@ jobs:
           body: "Automatically generated release for version ${{ github.ref_name }}."
           draft: true
           artifacts: |
-            ./${{github.repository}}-win-x86.zip 
-            ./${{github.repository}}-linux-x64.zip
-            ./${{github.repository}}-osx-x64.zip
+            ./${REPO_NAME}-win-x64.zip 
+            ./${REPO_NAME}-win-x86.zip 
+            ./${REPO_NAME}-linux-x64.zip
+            ./${REPO_NAME}-osx-x64.zip
