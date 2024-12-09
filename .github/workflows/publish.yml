@@ -53,11 +53,7 @@ jobs:
           token: ${{ secrets.GITHUB_TOKEN }}
           tag: ${{ github.ref_name }} # タグ名（例: v1.0.0）
           release_name: Release ${{ github.ref_name }}
-          assets: ./publish.zip
           body: "Automatically generated release for version ${{ github.ref_name }}."
           draft: true
           artifacts: |
-            ./$(echo ${{ github.repository }} | cut -d'/' -f2)-win-x64.zip 
-            ./$(echo ${{ github.repository }} | cut -d'/' -f2)-win-x86.zip 
-            ./$(echo ${{ github.repository }} | cut -d'/' -f2)-linux-x64.zip
-            ./$(echo ${{ github.repository }} | cut -d'/' -f2)-osx-x64.zip
+            ./*.zip 
