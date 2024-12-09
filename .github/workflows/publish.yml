@@ -27,25 +27,21 @@ jobs:
       - name: Restore dependencies
         run: dotnet restore
     
-      - name: Set version
-        id: version
-        run: |
-            echo "(REPO_NAME)=$(echo ${{ github.repository }} | cut -d'/' -f2)" >>
         # .NETプロジェクトをPublish
       - name: Publish  project
         run: |
-            dotnet publish -r win-x64 -c Release --self-contained true -o ./$(REPO_NAME)-win-x64 -p:PublishTrimmed=true -p:PublishSingleFile=true 
-            dotnet publish -r win-x86 -c Release --self-contained true -o ./$(REPO_NAME)-win-x86 -p:PublishTrimmed=true -p:PublishSingleFile=true 
-            dotnet publish -r linux-x64 -c Release --self-contained true -o ./$(REPO_NAME)-linux-x64 -p:PublishTrimmed=true -p:PublishSingleFile=true 
-            dotnet publish -r osx-x64 -c Release --self-contained true -o ./$(REPO_NAME)-osx-x64 -p:PublishTrimmed=true -p:PublishSingleFile=true 
+            dotnet publish -r win-x64 -c Release --self-contained true -o ./$$(echo ${{ github.repository }} | cut -d'/' -f2)-win-x64 -p:PublishTrimmed=true -p:PublishSingleFile=true 
+            dotnet publish -r win-x86 -c Release --self-contained true -o ./$$(echo ${{ github.repository }} | cut -d'/' -f2)-win-x86 -p:PublishTrimmed=true -p:PublishSingleFile=true 
+            dotnet publish -r linux-x64 -c Release --self-contained true -o ./$$(echo ${{ github.repository }} | cut -d'/' -f2)-linux-x64 -p:PublishTrimmed=true -p:PublishSingleFile=true 
+            dotnet publish -r osx-x64 -c Release --self-contained true -o ./$$(echo ${{ github.repository }} | cut -d'/' -f2)-osx-x64 -p:PublishTrimmed=true -p:PublishSingleFile=true 
 
       # アーティファクトを圧縮（オプション）
       - name: Zip the published files
         run: | 
-            zip -r ./$(REPO_NAME)-win-x64.zip ./$(REPO_NAME)-win-x64 
-            zip -r ./$(REPO_NAME)-win-x86.zip ./$(REPO_NAME)-win-x86 
-            zip -r ./$(REPO_NAME)-linux-x64.zip ./$(REPO_NAME)-linux-x64 
-            zip -r ./$(REPO_NAME)-osx-x64.zip ./$(REPO_NAME)-osx-x64 
+            zip -r ./$$(echo ${{ github.repository }} | cut -d'/' -f2)-win-x64.zip ./$$(echo ${{ github.repository }} | cut -d'/' -f2)-win-x64 
+            zip -r ./$$(echo ${{ github.repository }} | cut -d'/' -f2)-win-x86.zip ./$$(echo ${{ github.repository }} | cut -d'/' -f2)-win-x86 
+            zip -r ./$$(echo ${{ github.repository }} | cut -d'/' -f2)-linux-x64.zip ./$$(echo ${{ github.repository }} | cut -d'/' -f2)-linux-x64 
+            zip -r ./$$(echo ${{ github.repository }} | cut -d'/' -f2)-osx-x64.zip ./$$(echo ${{ github.repository }} | cut -d'/' -f2)-osx-x64 
             ls
             
 
@@ -60,7 +56,7 @@ jobs:
           body: "Automatically generated release for version ${{ github.ref_name }}."
           draft: true
           artifacts: |
-            ./$(REPO_NAME)-win-x64.zip 
-            ./$(REPO_NAME)-win-x86.zip 
-            ./$(REPO_NAME)-linux-x64.zip
-            ./$(REPO_NAME)-osx-x64.zip
+            ./$$(echo ${{ github.repository }} | cut -d'/' -f2)-win-x64.zip 
+            ./$$(echo ${{ github.repository }} | cut -d'/' -f2)-win-x86.zip 
+            ./$$(echo ${{ github.repository }} | cut -d'/' -f2)-linux-x64.zip
+            ./$$(echo ${{ github.repository }} | cut -d'/' -f2)-osx-x64.zip
